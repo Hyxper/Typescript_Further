@@ -11,7 +11,7 @@
     "typescript",
     "course"
   ],
-  "author": "Maximilian Schwarzmüller",
+  "author": "jack sargeant",
   "license": "ISC",
   "devDependencies": {
     "lite-server": "^2.6.1"
