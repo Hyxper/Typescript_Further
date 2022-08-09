@@ -1,10 +1,21 @@
 "use strict";
+let addy;
+addy = (a, b) => {
+    return a + b;
+};
 class Person {
-    constructor(_name) {
-        this._name = _name;
+    constructor(namey) {
+        if (namey) {
+            this._name = namey;
+        }
     }
     get name() {
-        return this._name;
+        if (this._name) {
+            return this._name;
+        }
+        else {
+            return "not set";
+        }
     }
     set name(value) {
         this._name = value;

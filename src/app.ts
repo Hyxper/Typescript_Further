@@ -4,28 +4,58 @@
  * TODO
  * *
  */
- interface Greetable {
-    name: string;
+
+
+interface Greetable extends Nameable {
     greet(pharse:string): void;
+}
+
+interface AddFun{
+    (a: number, b:number): number;
+}
+
+let addy: AddFun;
+
+addy=(a: number, b:number)=>{
+    return a+b;
+ }
+
+ interface Nameable {
+    readonly name?: string;
+    
 }
 
 class Person implements Greetable{
 
+
+    private _name?: string;
+
     //!GETS AND SETS
     public get name(): string {
-        return this._name;
+        if(this._name){
+            return this._name;
+        }else{
+            return "not set";
+        }
+        
     }
     public set name(value: string) {
         this._name = value;
     }
     //*CONSTRUCTORS
-    constructor (private _name: string){
+    constructor (namey: string){
+        if(namey){
+            this._name = namey;
+        }
+
     }
     //?METHODS
     greet(pharse: string): void {
         console.log(`Hello, my name is ${pharse}`);
     }
 
+  
+  
 }
 
 let personOne: Greetable;
