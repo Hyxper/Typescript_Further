@@ -1,80 +1,82 @@
-/**
- * ?
- * !
- * TODO
- * *
- */
+//! intersection types
+
+type Admin = {
+    name: string;
+    privileges: string[];
+};
 
 
-interface Greetable extends Nameable {
-    greet(pharse:string): void;
+type Employee = {
+    name: string;
+    startDate: Date;
+};
+
+
+// interface ElevatedEmployee extends Employee, Admin {}
+type ElevatedEmployee = Admin & Employee;
+
+
+const e1: ElevatedEmployee = {
+    name: "Max",
+    privileges: ["CREATE-SERVER"],
+    startDate: new Date()
 }
 
-interface AddFun{
-    (a: number, b:number): number;
+type Numeric = string | boolean;
+
+type Combinable = number | string;
+
+type intersect = Numeric & Combinable;
+
+function add(a: Combinable, b:Combinable){
+    if (typeof a === "string" || typeof b === "string") {
+        return a.toString() + b.toString();
+    }
+    return a + b;
 }
 
-let addy: AddFun;
 
-addy=(a: number, b:number)=>{
-    return a+b;
- }
+type UnkwEmployee = Employee | Admin;
 
- interface Nameable {
-    readonly name?: string;
-    
+function printEmp (emp: UnkwEmployee) {
+    console.log(`Name: ${emp.name}`);
+
+    if("privileges" in emp){
+        console.log(`Privelleges: ${emp.privileges}`);
+    }
+    if("startDate" in emp){
+        console.log(`Privelleges: ${emp.startDate}`);
+    }
 }
 
-class Person implements Greetable{
-
-
-    private _name?: string;
-
-    //!GETS AND SETS
-    public get name(): string {
-        if(this._name){
-            return this._name;
-        }else{
-            return "not set";
-        }
-        
+class Car {
+    reverse(){
+        console.log("Reverse");
     }
-    public set name(value: string) {
-        this._name = value;
-    }
-    //*CONSTRUCTORS
-    constructor (namey: string){
-        if(namey){
-            this._name = namey;
-        }
-
-    }
-    //?METHODS
-    greet(pharse: string): void {
-        console.log(`Hello, my name is ${pharse}`);
-    }
-
-  
-  
 }
 
-let personOne: Greetable;
+class Truck {
+    reverse(){
+        console.log("Reverse truck");
+    }
+    load(){
+        console.log("loading");
+    }
+}
 
-personOne = new Person("Jack");
-let personTwo = new Person("Dan");
+type Vehicle = Car | Truck;
 
+const v1 = new Car();
+const v2 = new Truck();
 
+function useVehicle(vehicle: Vehicle){
 
+    vehicle.reverse();
 
-//TODO var we will store an object in
-// let user1: Person;
+    if(vehicle instanceof Truck){
+        vehicle.load();
+    }
+}
 
-// user1 = {
-//     name:"Jack",
-//     age: 25,
-//     greet(phrase: string): void{
-//         console.log(`hello my name is ${this.name} and my age is ${this.age} and ${phrase}`)
-//     }
-
-// }
-// user1.greet("!!!!!!!!");
+useVehicle(v1);
+useVehicle(v2);

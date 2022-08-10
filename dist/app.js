@@ -1,30 +1,45 @@
 "use strict";
-let addy;
-addy = (a, b) => {
-    return a + b;
+const e1 = {
+    name: "Max",
+    privileges: ["CREATE-SERVER"],
+    startDate: new Date()
 };
-class Person {
-    constructor(namey) {
-        if (namey) {
-            this._name = namey;
-        }
+function add(a, b) {
+    if (typeof a === "string" || typeof b === "string") {
+        return a.toString() + b.toString();
     }
-    get name() {
-        if (this._name) {
-            return this._name;
-        }
-        else {
-            return "not set";
-        }
+    return a + b;
+}
+function printEmp(emp) {
+    console.log(`Name: ${emp.name}`);
+    if ("privileges" in emp) {
+        console.log(`Privelleges: ${emp.privileges}`);
     }
-    set name(value) {
-        this._name = value;
-    }
-    greet(pharse) {
-        console.log(`Hello, my name is ${pharse}`);
+    if ("startDate" in emp) {
+        console.log(`Privelleges: ${emp.startDate}`);
     }
 }
-let personOne;
-personOne = new Person("Jack");
-let personTwo = new Person("Dan");
+class Car {
+    reverse() {
+        console.log("Reverse");
+    }
+}
+class Truck {
+    reverse() {
+        console.log("Reverse truck");
+    }
+    load() {
+        console.log("loading");
+    }
+}
+const v1 = new Car();
+const v2 = new Truck();
+function useVehicle(vehicle) {
+    vehicle.reverse();
+    if (vehicle instanceof Truck) {
+        vehicle.load();
+    }
+}
+useVehicle(v1);
+useVehicle(v2);
 //# sourceMappingURL=app.js.map
