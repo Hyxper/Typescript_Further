@@ -25,6 +25,9 @@ type Combinable = number | string;
 
 type intersect = Numeric & Combinable;
 
+//TS CANT KNOW WHAT TYPE IS RETURNED
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
 function add(a: Combinable, b: Combinable) {
     if (typeof a === 'string' || typeof b === 'string') {
         return a.toString() + b.toString();
@@ -32,76 +35,114 @@ function add(a: Combinable, b: Combinable) {
     return a + b;
 }
 
-type UnkwEmployee = Employee | Admin;
+let first: Combinable = 'A';
+let second: Combinable = 22;
 
-function printEmp(emp: UnkwEmployee) {
-    console.log(`Name: ${emp.name}`);
+// const result = add();
 
-    if ('privileges' in emp) {
-        console.log(`Privelleges: ${emp.privileges}`);
-    }
-    if ('startDate' in emp) {
-        console.log(`Privelleges: ${emp.startDate}`);
-    }
-}
+//OPTIONAL CHAINING, IMAGINE WE HAVE FETCHED THIS FROM A BACKEND, BUT ARE UNSURE IF IT IS COMPLETED
+const fetchedUserData = {
+    id: 'u1',
+    name: 'Jack',
+    job: { title: 'god', description: 'boss' },
+};
 
-class Car {
-    reverse() {
-        console.log('Reverse');
-    }
-}
+console.log(fetchedUserData?.job?.description);
 
-class Truck {
-    reverse() {
-        console.log('Reverse truck');
-    }
-    load() {
-        console.log('loading');
-    }
-}
+const uIp = '';
 
-type Vehicle = Car | Truck;
+const store = uIp ?? 'DEFAULT';
 
-const v1 = new Car();
-const v2 = new Truck();
+console.log(store);
+// type UnkwEmployee = Employee | Admin;
 
-function useVehicle(vehicle: Vehicle) {
-    vehicle.reverse();
+// function printEmp(emp: UnkwEmployee) {
+//     console.log(`Name: ${emp.name}`);
 
-    if (vehicle instanceof Truck) {
-        vehicle.load();
-    }
-}
+//     if ('privileges' in emp) {
+//         console.log(`Privelleges: ${emp.privileges}`);
+//     }
+//     if ('startDate' in emp) {
+//         console.log(`Privelleges: ${emp.startDate}`);
+//     }
+// }
 
-useVehicle(v1);
-useVehicle(v2);
+// class Car {
+//     reverse() {
+//         console.log('Reverse');
+//     }
+// }
 
-interface Bird {
-    kind: `bird`;
-    flyingSpeed: number;
-}
+// class Truck {
+//     reverse() {
+//         console.log('Reverse truck');
+//     }
+//     load() {
+//         console.log('loading');
+//     }
+// }
 
-interface honse {
-    kind: `honse`;
-    runningSpeed: number;
-}
+// type Vehicle = Car | Truck;
 
-type Animal = Bird | honse;
+// const v1 = new Car();
+// const v2 = new Truck();
 
-let speed;
-//COULD USE A TYPE GUARD TO RUN
-function moveAnimal(animal: Animal) {
-    switch (animal.kind) {
-        case `bird`:
-            speed = animal.flyingSpeed;
-            break;
-        case `honse`:
-            speed = animal.runningSpeed;
-            break;
-    }
-    console.log(`moving at speed: ${speed}`);
-}
+// function useVehicle(vehicle: Vehicle) {
+//     vehicle.reverse();
 
-moveAnimal({ kind: 'bird', flyingSpeed: 100 });
+//     if (vehicle instanceof Truck) {
+//         vehicle.load();
+//     }
+// }
 
-const para = document.querySelector('p');
+// useVehicle(v1);
+// useVehicle(v2);
+
+// interface Bird {
+//     kind: `bird`;
+//     flyingSpeed: number;
+// }
+
+// interface honse {
+//     kind: `honse`;
+//     runningSpeed: number;
+// }
+
+// type Animal = Bird | honse;
+
+// //COULD USE A TYPE GUARD TO RUN
+// function moveAnimal(animal: Animal) {
+//     let speed;
+//     switch (animal.kind) {
+//         case `bird`:
+//             speed = animal.flyingSpeed;
+//             break;
+//         case `honse`:
+//             speed = animal.runningSpeed;
+//             break;
+//     }
+//     console.log(`moving at speed: ${speed}`);
+// }
+
+// moveAnimal({ kind: 'bird', flyingSpeed: 100 });
+
+// // const userIPelement = <HTMLInputElement>document.getElementById('userinput')!;
+// const userIPelement = document.getElementById('userinput') as HTMLInputElement;
+
+// userIPelement.value = 'Hello';
+
+// //this is basically saying that I can define as many properties in a inheriting object/class that I like,
+// // however they all must have a property name that fits the prop type (string), and also must contain a value as defined
+// interface ErrorContainer {
+//     //{email: "Not a valid email",username: "must start with a character"}
+//     [prop: string]: string;
+
+// }
+
+// //so this implements the interface above.
+// const errorBag: ErrorContainer = {
+//     1: '10A',
+//     2: 'sdads@asdasd/com',
+//     3: 'start with a capital',
+//     4: 'test',
+// };

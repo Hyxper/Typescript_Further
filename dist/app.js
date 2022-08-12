@@ -1,45 +1,25 @@
 "use strict";
+var _a;
 const e1 = {
-    name: "Max",
-    privileges: ["CREATE-SERVER"],
-    startDate: new Date()
+    name: 'Max',
+    privileges: ['CREATE-SERVER'],
+    startDate: new Date(),
 };
 function add(a, b) {
-    if (typeof a === "string" || typeof b === "string") {
+    if (typeof a === 'string' || typeof b === 'string') {
         return a.toString() + b.toString();
     }
     return a + b;
 }
-function printEmp(emp) {
-    console.log(`Name: ${emp.name}`);
-    if ("privileges" in emp) {
-        console.log(`Privelleges: ${emp.privileges}`);
-    }
-    if ("startDate" in emp) {
-        console.log(`Privelleges: ${emp.startDate}`);
-    }
-}
-class Car {
-    reverse() {
-        console.log("Reverse");
-    }
-}
-class Truck {
-    reverse() {
-        console.log("Reverse truck");
-    }
-    load() {
-        console.log("loading");
-    }
-}
-const v1 = new Car();
-const v2 = new Truck();
-function useVehicle(vehicle) {
-    vehicle.reverse();
-    if (vehicle instanceof Truck) {
-        vehicle.load();
-    }
-}
-useVehicle(v1);
-useVehicle(v2);
+let first = 'A';
+let second = 22;
+const fetchedUserData = {
+    id: 'u1',
+    name: 'Jack',
+    job: { title: 'god', description: 'boss' },
+};
+console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.description);
+const uIp = '';
+const store = uIp !== null && uIp !== void 0 ? uIp : 'DEFAULT';
+console.log(store);
 //# sourceMappingURL=app.js.map
