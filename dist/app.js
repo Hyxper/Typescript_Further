@@ -1,67 +1,37 @@
 "use strict";
-const names = ['max', 'jack'];
-const promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve('this is done');
-    }, 2000);
-    if (!resolve) {
-        reject('rejected');
-    }
-});
-promise.then((data) => {
-    data.split('.');
-});
-promise.catch(() => {
-    console.log('REJECTED');
-});
-let objone = {
-    name: 'Max',
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-let objtwo = {
-    age: 21,
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-function merger(objA, objB) {
-    return Object.assign({}, objA, objB);
+function Logger(logStr) {
+    return function (constructor) {
+        console.log(logStr);
+        console.log(constructor);
+    };
 }
-const mergeObj = merger(objone, objtwo);
-mergeObj.age;
-const mergeObjTwo = merger(objone, objtwo);
-function merger2(objA, objB) {
-    return Object.assign({}, objA, objB);
+function WithTemplate(template, hookID) {
+    return function (_) {
+        const hookEl = document.getElementById(hookID);
+        if (hookEl) {
+            hookEl.innerHTML = template;
+        }
+    };
 }
-const mergeObj3 = merger2(objone, objtwo);
-mergeObj3.age;
-function countAndPrint(element) {
-    let descriptionText = 'No value';
-    if (element.length === 1) {
-        descriptionText = `I HAVE 1 ELEMENT.`;
-    }
-    else if (element.length > 1) {
-        descriptionText = `I HAVE ${element.length} ELEMENTS.`;
-    }
-    return [element, descriptionText];
-}
-console.log(countAndPrint('HELLO'));
-function extractAndConvert(obj, key) {
-    return obj[key];
-}
-extractAndConvert({ name: 'max' }, 'name');
-class DataStorage {
+let Person = class Person {
     constructor() {
-        this.data = [];
+        this.name = 'Jack';
+        console.log('creating person..');
     }
-    addItem(item) {
-        this.data.push(item);
-    }
-    removeItem(item) {
-        this.data.splice(this.data.indexOf(item), -1);
-    }
-}
-const textStorage = new DataStorage();
-textStorage.addItem('Jack');
-textStorage.addItem('Bob');
-const objStore = new DataStorage();
-objStore.addItem({ name: 'jack' });
-objStore.addItem({ name: 'james' });
-objStore.removeItem({ name: 'jack' });
+};
+Person = __decorate([
+    WithTemplate('<h1>MY PERSON OBJ</h1>', 'app'),
+    __metadata("design:paramtypes", [])
+], Person);
+const pers = new Person();
+console.log(pers);
 //# sourceMappingURL=app.js.map
