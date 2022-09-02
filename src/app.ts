@@ -17,19 +17,13 @@ function Logger(logStr: string) {
 
 //! UNDERSCORE AS AN ARGUMENT TELLS TYPESCRIPT IT DOES NOT NEED THE ARGUMENT
 function WithTemplate(template: string, hookID: string) {
-    return function (oGconstructor: any) {
-        //*SYNTACTIC SUGAR FOR ACCESSING CONSTRUCTOR
-        return class extends oGconstructor {
-            constructor() {
-                super();
-                const hookEl = document.getElementById(hookID);
-                const p = new oGconstructor();
-                if (hookEl) {
-                    hookEl.innerHTML = template;
-                    hookEl.querySelector('h1')!.textContent = p.name;
-                }
-            }
-        };
+    return function (constructor: any) {
+        const hookEl = document.getElementById(hookID);
+        const p = new constructor();
+        if (hookEl) {
+            hookEl.innerHTML = template;
+            hookEl.querySelector('h1')!.textContent = p.name;
+        }
     };
     //this is a decorator factory, as it is using a function
 }
@@ -70,7 +64,7 @@ function Log3(target: any, name: string | symbol, desc: PropertyDescriptor) {
 }
 
 function Log4(target: any, name: string | symbol, pos: number) {
-    console.log('Param Decorator...');
+    console.log('Method Decorator...');
     console.log(target, name, pos);
 }
 

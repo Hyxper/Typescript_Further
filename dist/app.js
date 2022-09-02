@@ -53,7 +53,7 @@ function Log3(target, name, desc) {
     console.log(target, name, desc);
 }
 function Log4(target, name, pos) {
-    console.log('Param Decorator...');
+    console.log('Method Decorator...');
     console.log(target, name, pos);
 }
 class Product {
